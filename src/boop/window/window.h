@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @example Window(name, width, height)
  */
@@ -20,6 +21,10 @@ public:
     Window(string name, int width, int height);
     bool isOpen() {
         return open;
+    }
+
+    SDL_Renderer* _SDL_RENDERER() {
+        return render;
     }
 
     void start() {

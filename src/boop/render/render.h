@@ -1,0 +1,20 @@
+#pragma once
+#include <boop/window/window.h>
+#include <boop/color/color.h>
+class Renderer
+{
+private:
+    SDL_Renderer* ren;
+public:
+    Renderer(Window window);
+    void rect(int x, int y, int w, int h, Color color) {
+        SDL_FRect rect = { x, y, w, h };
+        SDL_SetRenderDrawColor(ren, color.getRed(),color.getGreen(),color.getBlue(),color.getAlpha());
+        SDL_RenderFillRect(ren, &rect);
+    }
+};
+
+Renderer::Renderer(Window window)
+{
+    ren = window._SDL_RENDERER();
+}
