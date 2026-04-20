@@ -7,7 +7,7 @@ private:
     SDL_Renderer* ren;
 public:
     Renderer(Window window);
-    void rect(int x, int y, int w, int h, Color color) {
+    void rect(float x, float y, float w, float h, Color color) {
         SDL_FRect rect = { x, y, w, h };
         SDL_SetRenderDrawColor(ren, color.getRed(),color.getGreen(),color.getBlue(),color.getAlpha());
         SDL_RenderFillRect(ren, &rect);
