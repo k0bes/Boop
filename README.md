@@ -13,7 +13,7 @@ int main() {
     while (window.isOpen()) {
         window.start();
 
-        render.rect(0, 0, 64, 64, Color(255,255,255)); // draw a cube at the top left of the screen
+        render.rect(0, 0, 64, 64, Color(255,255,255)); // draw a rectangle at the top left of the screen
 
         window.end();
     }

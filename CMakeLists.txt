@@ -5,6 +5,7 @@ set(CMAKE_C_STANDARD 17)
 
 find_package(SDL3 REQUIRED CONFIG)
 find_package(SDL3_image REQUIRED CONFIG)
+find_package(SDL3_ttf REQUIRED CONFIG)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
@@ -15,4 +16,5 @@ target_include_directories(ct PRIVATE src)
 target_link_libraries(ct PRIVATE
     SDL3::SDL3
     SDL3_image::SDL3_image
+    SDL3_ttf::SDL3_ttf
 )

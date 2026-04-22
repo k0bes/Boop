@@ -1,3 +1,4 @@
+#pragma once
 class Color
 {
 private:
@@ -23,6 +24,15 @@ public:
 
     int getAlpha() {
         return alpha;
+    }
+
+    SDL_Color toSdl() {
+        SDL_Color sdl;
+        sdl.r = red;
+        sdl.g = green;
+        sdl.b = blue;
+        sdl.a = alpha;
+        return sdl;
     }
 };
 

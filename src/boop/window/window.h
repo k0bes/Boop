@@ -15,6 +15,8 @@ private:
     SDL_Window* window;
     SDL_Renderer* render;
     SDL_Event event;
+    int width;
+    int height;
 
     bool open;
 public:
@@ -41,9 +43,17 @@ public:
     void end() {
         SDL_RenderPresent(render);
     }
+
+    int getWidth() {
+        return width;
+    }
+
+    int getHeight() {
+        return height;
+    }
 };
 
-Window::Window(string name, int width, int height)
+Window::Window(string name, int width, int height): width(width), height(height)
 {
     bool initalized = SDL_Init(SDL_INIT_VIDEO);
 
