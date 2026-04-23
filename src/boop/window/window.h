@@ -39,6 +39,18 @@ public:
 
         }
     }
+    
+    void setPosition(float x, float y) {
+        SDL_SetWindowPosition(window, x, y);
+    }
+
+    void setFullscreen(bool state) {
+        SDL_SetWindowFullscreen(window, state);
+    }
+
+    void setSize(float width, float height) {
+        SDL_SetWindowSize(window, width, height);
+    }
 
     void end() {
         SDL_RenderPresent(render);
