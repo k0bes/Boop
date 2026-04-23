@@ -14,6 +14,10 @@ public:
         SDL_SetRenderDrawColor(ren, color.getRed(),color.getGreen(),color.getBlue(),color.getAlpha());
         SDL_RenderFillRect(ren, &rect);
     }
+
+    void scale(float x, float y) {
+        SDL_SetRenderScale(ren, x, y);
+    }
 };
 
 Renderer::Renderer(Window window)

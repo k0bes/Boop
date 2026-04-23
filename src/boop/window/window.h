@@ -6,7 +6,7 @@
 #include <string>
 #include <stdexcept>
 #include <iostream>
-
+#include <cstdlib>
 using namespace std;
 
 class Window
@@ -36,7 +36,6 @@ public:
             if (event.type == SDL_EVENT_QUIT)  {
                 open = false;
             }
-
         }
     }
     
@@ -67,7 +66,16 @@ public:
 
 Window::Window(string name, int width, int height): width(width), height(height)
 {
-    bool initalized = SDL_Init(SDL_INIT_VIDEO);
+
+
+
+    string sessionType = std::getenv("XDG_SESSION_TYPE"); 
+
+    if (sessionType == "wayland") {
+        setenv("SDL_VIDEODRIVER", "wayland", 1);
+    }
+
+    const bool initalized = SDL_Init(SDL_INIT_VIDEO);
 
     if (!initalized) {
         cout << SDL_GetError();
@@ -75,8 +83,11 @@ Window::Window(string name, int width, int height): width(width), height(height)
     }
 
 
+
+
     window = SDL_CreateWindow(name.c_str(), width,height,0);
     render = SDL_CreateRenderer(window, NULL);
+
 
     if (!render) {
         cout << "Can't create renderer. Do you have a GPU?";
