@@ -6,12 +6,12 @@
 int main() {
     Window window = Window("text.",1280,720);
     Renderer render = Renderer(window);
-    Font font = Font(window, "font.ttf");
+    Font font = Font(window, "build/font.ttf");
  
     while (window.isOpen()) {
         window.start();
 
-        font.render("Hello, World!", 0, 0, Color(255,255,255));
+        font.renderCenter("Hello, World!",window.getWidth(), window.getHeight(), Color(255,255,255));
 
         window.end();
     }
