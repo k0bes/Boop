@@ -12,16 +12,11 @@ private:
 public:
     Texture(Window& window, std::string textureLocation);
 
-    // void drawFill() {
-    //     SDL_RenderTexture(win._SDL_RENDERER(), texture, NULL, NULL);
-    // }
-
     void render(float x, float y, float width, float height) {
         SDL_FRect dst = {x, y, width, height};
         SDL_RenderTexture(win._SDL_RENDERER(), texture, NULL, &dst);
 
     }
-
     
 };
 
