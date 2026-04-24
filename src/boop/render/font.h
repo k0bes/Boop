@@ -59,7 +59,7 @@ Font::Font(Window& window, std::string fontPath): window(window)
         if (!TTF_Init()) {
         }
     }
-    font = TTF_OpenFont(fontPath.c_str(),35);
+    font = TTF_OpenFont(fontPath.c_str(),20);
     if (!font) {
         SDL_Log("%s (Does the fontPath exist?)", SDL_GetError());
     }

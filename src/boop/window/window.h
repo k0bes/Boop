@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <cstdlib>
+#include <format>
 using namespace std;
 
 class Window
@@ -15,8 +16,11 @@ private:
     SDL_Window* window;
     SDL_Renderer* render;
     SDL_Event event;
+    Uint64 performance = SDL_GetPerformanceFrequency();
+    Uint64 performanceCounter = SDL_GetPerformanceCounter();
     int width;
     int height;
+    float fps;
 
     bool open;
 public:
@@ -25,11 +29,22 @@ public:
         return open;
     }
 
+    float getFps() {
+        return fps;
+    }
+
     SDL_Renderer* _SDL_RENDERER() {
         return render;
     }
 
     void start() {
+
+        Uint64 now = SDL_GetPerformanceCounter();
+        float delta = (float)(now - performanceCounter) / performance;
+        performanceCounter = now;
+
+        fps = 1.0f / delta;
+
         SDL_SetRenderDrawColor(render, 0,0,0,0);
         SDL_RenderClear(render);
         while (SDL_PollEvent(&event)) {
@@ -66,9 +81,6 @@ public:
 
 Window::Window(string name, int width, int height): width(width), height(height)
 {
-
-
-
     string sessionType = std::getenv("XDG_SESSION_TYPE"); 
 
     if (sessionType == "wayland") {
@@ -76,6 +88,7 @@ Window::Window(string name, int width, int height): width(width), height(height)
     }
 
     const bool initalized = SDL_Init(SDL_INIT_VIDEO);
+    SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
 
     if (!initalized) {
         cout << SDL_GetError();
@@ -84,9 +97,9 @@ Window::Window(string name, int width, int height): width(width), height(height)
 
 
 
-
     window = SDL_CreateWindow(name.c_str(), width,height,0);
     render = SDL_CreateRenderer(window, NULL);
+    SDL_Log("renderer %s",SDL_GetRendererName(render));
 
 
     if (!render) {
